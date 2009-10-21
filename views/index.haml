@@ -1,0 +1,6 @@
+%h1 Newest followers
+
+%ol
+  = list_of @users.newest do |user|
+    %img{ :src => user.avatar_url, :alt => "" }
+    - link_to user.full_name, twitter_url(user)
