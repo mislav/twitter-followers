@@ -6,7 +6,7 @@ class User
   property :full_name,    String
   property :created_at,   DateTime
   property :updated_at,   DateTime
-  property :avatar_url,   String
+  property :avatar_url,   String,   :length => 255
   property :followers,    Integer
   property :following,    Integer
   property :tweets,       Integer
