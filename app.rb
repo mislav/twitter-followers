@@ -27,6 +27,7 @@ end
 
 configure do
   dbconfig = Egotrip.config[:database]
+  DataMapper::Logger.new(STDOUT, :debug) if 'irb' == $0
   adapter = DataMapper.setup(:default, dbconfig)
   
   if ':memory:' == adapter.options['path']
@@ -61,10 +62,16 @@ helpers do
   def current_user
     @current_user ||= User.get(session[:user_id])
   end
+  
+  def image(src)
+    capture_haml { haml_tag :img, :src => src, :alt => "" }
+  end
 end
 
 get '/' do
-  @users = User.all
+  if logged_in?
+    @followers = current_user.followers(:newest, :unprocessed)
+  end
   haml :index
 end
 
@@ -77,7 +84,7 @@ get '/login' do
 end
 
 get '/logout' do
-  session[:user_id] = nil
+  session.clear
   redirect '/'
 end
 
@@ -93,7 +100,10 @@ get '/authorized' do
     :followers_count => cred.followers_count, :following_count => cred.friends_count,
     :tweets_count => cred.statuses_count
   })
-  session[:user_id] = user.id
+  
+  session.update :user_id => user.id,
+    :atoken => oauth.access_token.token, :asecret => oauth.access_token.secret
+  
   
   redirect '/'
 end
@@ -101,6 +111,24 @@ end
 post '/' do
   user = User.from_html_email params[:html]
   nil
+end
+
+post '/approve' do
+  user_ids = params[:user_ids].map { |id| id.to_i }
+  block_ids = params[:block_ids].map { |id| id.to_i }
+  
+  oauth = Egotrip.oauth
+  oauth.authorize_from_access(session[:atoken], session[:asecret])
+  twitter = Twitter::Base.new(oauth)
+  
+  current_user.followings(:user_id => user_ids).each do |follow|
+    if follow.blocked = block_ids.include?(follow.user.id)
+      twitter.block follow.user.screen_name
+    end
+    follow.save
+  end
+  
+  redirect '/'
 end
 
 get '/screen.css' do

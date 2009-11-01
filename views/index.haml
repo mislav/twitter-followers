@@ -1,6 +1,28 @@
-%h1 Newest followers
+- if logged_in?
+  %p
+    Logged in as
+    - link_to current_user.screen_name, twitter_url(current_user)
+    &mdash;
+    - link_to 'logout', '/logout'
+    
+  
+  - if @followers.empty?
+    %p No new followers.
+  - else
+    %h1 Newest followers
+    
+    %form{ :action => '/approve', :method => 'post' }
+      %ol
+        = list_of @followers do |user|
+          %img{ :src => user.avatar_url, :alt => "" }
+          - link_to user.full_name, twitter_url(user)
+          %input{ :type => 'hidden', :name => 'user_ids[]', :value => user.id }
+          %input{ :type => 'checkbox', :name => 'block_ids[]', :value => user.id, :id => "block_#{user.id}" }
+          %label{ :for => "block_#{user.id}" } block?
+      
+      .actions
+        %input{ :type => 'submit', :value => 'Approve' }
 
-%ol
-  = list_of @users.newest do |user|
-    %img{ :src => user.avatar_url, :alt => "" }
-    - link_to user.full_name, twitter_url(user)
+- else
+  %p You're not logged in
+  - link_to image('/signin-twitter.png'), '/login'
