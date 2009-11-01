@@ -4,6 +4,6 @@ end
 
 namespace :db do
   task :migrate => [:environment] do
-    DataMapper.auto_migrate!
+    DataMapper.auto_upgrade!
   end
 end
