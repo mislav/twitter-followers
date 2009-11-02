@@ -26,6 +26,14 @@ class User
     all(:order => [ :created_at.desc ])
   end
   
+  def self.from_credentials(cred)
+    first_or_create({:screen_name => cred.screen_name}, {
+      :full_name => cred.name, :avatar_url => cred.profile_image_url,
+      :followers_count => cred.followers_count, :following_count => cred.friends_count,
+      :tweets_count => cred.statuses_count
+    })
+  end
+  
   def self.from_html_email(html)
     doc = Nokogiri::HTML html
     attributes = parse_attributes(doc)
@@ -46,6 +54,18 @@ class User
     }
     
     attributes
+  end
+  
+  def approve(user_ids, block_ids, twitter)
+    user_ids = user_ids.map { |id| id.to_i }
+    block_ids = block_ids.map { |id| id.to_i }
+    
+    self.followings(:user_id => user_ids).each do |follow|
+      if follow.blocked = block_ids.include?(follow.user.id)
+        twitter.block follow.user.screen_name
+      end
+      follow.save
+    end
   end
 end
 

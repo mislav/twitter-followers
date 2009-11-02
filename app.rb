@@ -37,10 +37,10 @@ end
 
 helpers do
   def url_for(path)
-    url = request.scheme + "://"+ request.host
+    url = request.scheme + '://' + request.host
 
-    if request.scheme == "https" && request.port != 443 ||
-        request.scheme == "http" && request.port != 80
+    if request.scheme == 'https' && request.port != 443 ||
+        request.scheme == 'http' && request.port != 80
       url << ":#{request.port}"
     end
 
@@ -48,7 +48,7 @@ helpers do
   end
   
   def twitter_url(user)
-    "http://twitter.com/#{user.screen_name}"
+    'http://twitter.com/' + user.screen_name
   end
   
   def link_to(text, href)
@@ -66,6 +66,27 @@ helpers do
   def image(src)
     capture_haml { haml_tag :img, :src => src, :alt => "" }
   end
+  
+  def oauth_request_token(callback)
+    Egotrip.oauth(:sign_in => true).tap { |oauth|
+      oauth.set_callback_url(callback)
+    }.request_token.tap do |token|
+      session[:rtoken], session[:rsecret] = token.token, token.secret
+    end
+  end
+  
+  def oauth_authorized
+    Twitter::Base.new Egotrip.oauth.tap { |oauth|
+      oauth.authorize_from_request(session[:rtoken], session[:rsecret], params[:oauth_verifier])
+      session.update(:atoken => oauth.access_token.token, :asecret => oauth.access_token.secret)
+    }
+  end
+  
+  def oauth_access
+    Twitter::Base.new Egotrip.oauth.tap { |oauth|
+      oauth.authorize_from_access(session[:atoken], session[:asecret])
+    }
+  end
 end
 
 get '/' do
@@ -76,11 +97,15 @@ get '/' do
 end
 
 get '/login' do
-  oauth = Egotrip.oauth(:sign_in => true)
-  oauth.set_callback_url url_for('/authorized')
-  token = oauth.request_token
-  session[:rtoken], session[:rsecret] = token.token, token.secret
+  token = oauth_request_token(url_for('/authorized'))
   redirect token.authorize_url
+end
+
+get '/authorized' do
+  twitter = oauth_authorized
+  user = User.from_credentials(twitter.verify_credentials)
+  session.update :user_id => user.id
+  redirect '/'
 end
 
 get '/logout' do
@@ -88,46 +113,13 @@ get '/logout' do
   redirect '/'
 end
 
-get '/authorized' do
-  rtoken, rsecret = session[:rtoken], session[:rsecret]
-  oauth = Egotrip.oauth
-  oauth.authorize_from_request rtoken, rsecret, params[:oauth_verifier]
-  twitter = Twitter::Base.new(oauth)
-  cred = twitter.verify_credentials
-  
-  user = User.first_or_create({:screen_name => cred.screen_name}, {
-    :full_name => cred.name, :avatar_url => cred.profile_image_url,
-    :followers_count => cred.followers_count, :following_count => cred.friends_count,
-    :tweets_count => cred.statuses_count
-  })
-  
-  session.update :user_id => user.id,
-    :atoken => oauth.access_token.token, :asecret => oauth.access_token.secret
-  
-  
-  redirect '/'
-end
-
 post '/' do
-  user = User.from_html_email params[:html]
+  user = User.from_html_email(params[:html])
   nil
 end
 
 post '/approve' do
-  user_ids = params[:user_ids].map { |id| id.to_i }
-  block_ids = params[:block_ids].map { |id| id.to_i }
-  
-  oauth = Egotrip.oauth
-  oauth.authorize_from_access(session[:atoken], session[:asecret])
-  twitter = Twitter::Base.new(oauth)
-  
-  current_user.followings(:user_id => user_ids).each do |follow|
-    if follow.blocked = block_ids.include?(follow.user.id)
-      twitter.block follow.user.screen_name
-    end
-    follow.save
-  end
-  
+  current_user.approve(params[:user_ids], params[:block_ids], oauth_access)
   redirect '/'
 end
 
