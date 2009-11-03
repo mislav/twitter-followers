@@ -1,14 +1,9 @@
 require 'yaml'
 require 'sinatra'
-require 'twitter'
-
-require 'dm-core'
-require 'dm-timestamps'
-require 'models'
-
 require 'haml'
 require 'sass'
-require 'nokogiri'
+
+require 'models'
 
 set :haml, { :format => :html5 }
 enable :sessions
@@ -25,14 +20,15 @@ module Egotrip
   end
 end
 
-configure do
-  dbconfig = Egotrip.config[:database]
+
+configure :development do
   DataMapper::Logger.new(STDOUT, :debug) if 'irb' == $0
-  adapter = DataMapper.setup(:default, dbconfig)
-  
-  if ':memory:' == adapter.options['path']
-    DataMapper.auto_migrate!
-  end
+  DataMapper.setup(:default, Egotrip.config[:database])
+end
+
+configure :test do
+  DataMapper.setup(:default, 'sqlite3::memory:')
+  DataMapper.auto_migrate!
 end
 
 helpers do
