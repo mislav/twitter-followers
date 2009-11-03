@@ -24,7 +24,7 @@ use Rack::Session::Cookie
 use Twitter::OAuthLogin, :key => Egotrip.config[:oauth][:key], :secret => Egotrip.config[:oauth][:secret]
 helpers Twitter::OAuthLogin::Helpers
 
-configure :development do
+configure :development, :production do
   DataMapper::Logger.new(STDOUT, :debug) if 'irb' == $0
   DataMapper.setup(:default, Egotrip.config[:database])
 end
