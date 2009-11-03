@@ -30,11 +30,11 @@ class User
     all(:order => [ :created_at.desc ])
   end
   
-  def self.from_credentials(cred)
-    first_or_create({:screen_name => cred.screen_name}, {
-      :full_name => cred.name, :avatar_url => cred.profile_image_url,
-      :followers_count => cred.followers_count, :following_count => cred.friends_count,
-      :tweets_count => cred.statuses_count
+  def self.from_twitter(user)
+    first_or_create({:screen_name => user.screen_name}, {
+      :full_name => user.name, :avatar_url => user.profile_image_url,
+      :followers_count => user.followers_count, :following_count => user.friends_count,
+      :tweets_count => user.statuses_count
     })
   end
   

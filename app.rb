@@ -6,20 +6,23 @@ require 'sass'
 require 'models'
 
 set :haml, { :format => :html5 }
-enable :sessions
 
 module Egotrip
-  ConfigFile = ENV['CONFIG'] || File.dirname(__FILE__) + '/config.yml'
-  
-  def self.config
-    @config ||= YAML::load File.read(ConfigFile)
+  def self.config_file
+    @config_file ||= ENV['CONFIG'] || File.dirname(__FILE__) + '/config.yml'
   end
   
-  def self.oauth(options = {})
-    Twitter::OAuth.new(config[:oauth][:key], config[:oauth][:secret], options)
+  def self.config
+    @config ||= File.exists?(config_file) ? YAML::load(File.read(config_file)) : {}
   end
 end
 
+
+require 'oauth_login'
+# enable :sessions
+use Rack::Session::Cookie
+use Twitter::OAuthLogin, :key => Egotrip.config[:oauth][:key], :secret => Egotrip.config[:oauth][:secret]
+helpers Twitter::OAuthLogin::Helpers
 
 configure :development do
   DataMapper::Logger.new(STDOUT, :debug) if 'irb' == $0
@@ -51,37 +54,20 @@ helpers do
     haml_tag :a, text, :href => href
   end
   
-  def logged_in?
-    session[:user_id]
-  end
-  
-  def current_user
-    @current_user ||= User.get(session[:user_id])
-  end
-  
   def image(src)
     capture_haml { haml_tag :img, :src => src, :alt => "" }
   end
   
-  def oauth_request_token(callback)
-    Egotrip.oauth(:sign_in => true).tap { |oauth|
-      oauth.set_callback_url(callback)
-    }.request_token.tap do |token|
-      session[:rtoken], session[:rsecret] = token.token, token.secret
-    end
+  def logged_in?
+    session[:user_id]
   end
   
-  def oauth_authorized
-    Twitter::Base.new Egotrip.oauth.tap { |oauth|
-      oauth.authorize_from_request(session[:rtoken], session[:rsecret], params[:oauth_verifier])
-      session.update(:atoken => oauth.access_token.token, :asecret => oauth.access_token.secret)
-    }
+  def requires_login!
+    halt 401 unless logged_in?
   end
   
-  def oauth_access
-    Twitter::Base.new Egotrip.oauth.tap { |oauth|
-      oauth.authorize_from_access(session[:atoken], session[:asecret])
-    }
+  def current_user
+    @current_user ||= User.get(session[:user_id])
   end
 end
 
@@ -93,20 +79,14 @@ get '/' do
 end
 
 get '/login' do
-  token = oauth_request_token(url_for('/authorized'))
-  redirect token.authorize_url
-end
-
-get '/authorized' do
-  twitter = oauth_authorized
-  user = User.from_credentials(twitter.verify_credentials)
+  user = User.from_twitter(twitter_user)
   session.update :user_id => user.id
-  redirect '/'
+  redirect url_for('/')
 end
 
 get '/logout' do
   session.clear
-  redirect '/'
+  redirect url_for('/')
 end
 
 post '/' do
@@ -115,8 +95,9 @@ post '/' do
 end
 
 post '/approve' do
-  current_user.approve(params[:user_ids], params[:block_ids], oauth_access)
-  redirect '/'
+  requires_login!
+  current_user.approve(params[:user_ids], params[:block_ids], twitter_consumer)
+  redirect url_for('/')
 end
 
 get '/screen.css' do
