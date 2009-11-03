@@ -43,17 +43,16 @@ class User
   end
   
   def self.parse_attributes(doc)
-    a = {}
-    a[:avatar_url] = doc.at('img[width="48px"]')['src'].to_s
+    Hash.new.tap do |a|
+      a[:avatar_url] = doc.at('img[width="48px"]')['src'].to_s
     
-    user_title = doc.at('a[href*="utm_source=follow"]').inner_text
-    _, a[:full_name], a[:screen_name] = user_title.match(/(.+) \((.+?)\)$/).to_a
+      user_title = doc.at('a[href*="utm_source=follow"]').inner_text
+      _, a[:full_name], a[:screen_name] = user_title.match(/(.+) \((.+?)\)$/).to_a
     
-    a[:followers_count], a[:tweets_count], a[:following_count] = doc.search('//td/span/span').map { |info|
-      info.inner_text.scan(/\d+/).first.to_i
-    }
-    
-    attributes
+      a[:followers_count], a[:tweets_count], a[:following_count] = doc.search('//td/span/span').map { |info|
+        info.inner_text.scan(/\d+/).first.to_i
+      }
+    end
   end
   
   def approve(user_ids, block_ids, twitter)
