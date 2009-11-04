@@ -60,8 +60,12 @@ class User
   end
   
   def approve(user_ids, block_ids, twitter)
-    user_ids = user_ids.map { |id| id.to_i }
-    block_ids = block_ids.map { |id| id.to_i }
+    user_ids = Array(user_ids).map { |id| id.to_i }
+    block_ids = Array(block_ids).map { |id| id.to_i }
+    
+    # fix for a strange issue in DataMapper 0.10.1 where
+    # it complains that `user_id` is not property of Follow
+    Follow.last.user
     
     self.followings(:user_id => user_ids).each do |follow|
       if follow.blocked = block_ids.include?(follow.user.id)

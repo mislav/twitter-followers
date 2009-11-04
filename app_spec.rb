@@ -75,6 +75,20 @@ describe "application" do
     current_user.screen_name.should == 'faker'
   end
   
+  it "should approve or block" do
+    mislav = User.first_or_create(:screen_name => 'mislav')
+    follower1 = User.create(:screen_name => 'follower1')
+    follower1.follows.create(:target => mislav)
+    follower2 = User.create(:screen_name => 'follower2')
+    follower2.follows.create(:target => mislav)
+    
+    mock_oauth_consumer('Twitter Base')
+    params = { 'user_ids[]' => [follower1.id, follower2.id] }
+    post('/approve', build_session(:user_id => mislav.id).update(:lint => true, :input => Rack::Utils.build_query(params)))
+    
+    mislav.followings(:user_id => [follower1.id, follower2.id]).map { |f| f.blocked }.should == [false, false]
+  end
+  
   [:get, :post, :put, :delete, :head].each do |method|
     class_eval("def #{method}(*args) @response = @request.#{method}(*args) end")
   end
@@ -102,8 +116,9 @@ describe "application" do
   
   def mock_oauth_consumer(*args)
     consumer = mock(*args)
-    OAuth::Consumer.should_receive(:new).with(instance_of(String), instance_of(String),
-      :site => 'http://twitter.com', :authorize_path => '/oauth/authenticate').and_return(consumer)
+    OAuth::Consumer.should_receive(:new).and_return(consumer)
+    # .with(instance_of(String), instance_of(String),
+    # :site => 'http://twitter.com', :authorize_path => '/oauth/authenticate')
     consumer
   end
 end
