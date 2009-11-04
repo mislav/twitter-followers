@@ -92,7 +92,7 @@ class Twitter::OAuthLogin
     request.session[:oauth_consumer] = [consumer.key, consumer.secret, consumer.options]
     
     twitter = Twitter::Base.new access_token
-    request.env['twitter.authenticated_user'] = twitter.verify_credentials.user
+    request.env['twitter.authenticated_user'] = twitter.verify_credentials
     
     response = yield
     

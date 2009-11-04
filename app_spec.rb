@@ -61,7 +61,7 @@ describe "application" do
     user_credentials = { :screen_name => 'faker',
       :name => 'Fake Jr.', :profile_image_url => 'http://disney.com/mickey.png',
       :followers_count => '13', :friends_count => '6', :statuses_count => '52' }
-    twitter.should_receive(:verify_credentials).and_return({:user => user_credentials}.to_mash)
+    twitter.should_receive(:verify_credentials).and_return(user_credentials.to_mash)
     
     session_data = {:request_token => ['abc', '123']}
     get('/login?oauth_verifier=abc', build_session(session_data).update(:lint => true))
