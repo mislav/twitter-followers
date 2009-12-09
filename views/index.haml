@@ -14,7 +14,7 @@
     %form{ :action => '/approve', :method => 'post' }
       %ol
         = list_of @followers do |user|
-          %img{ :src => user.avatar_url, :alt => "" }
+          = image(user.avatar_url, :width => 48, :height => 48)
           - link_to user.full_name, twitter_url(user)
           %input{ :type => 'hidden', :name => 'user_ids[]', :value => user.id }
           %input{ :type => 'checkbox', :name => 'block_ids[]', :value => user.id, :id => "block_#{user.id}" }

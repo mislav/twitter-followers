@@ -52,8 +52,10 @@ helpers do
     haml_tag :a, text, :href => href
   end
   
-  def image(src)
-    capture_haml { haml_tag :img, :src => src, :alt => "" }
+  def image(src, attrs = {})
+    capture_haml do
+      haml_tag :img, {:src => src, :alt => ""}.update(attrs)
+    end
   end
   
   def logged_in?
