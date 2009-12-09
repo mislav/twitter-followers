@@ -1,7 +1,9 @@
-require 'rubygems'
-gem 'dm-core', '~> 0.10.1'
-gem 'dm-timestamps', '~> 0.10.1'
-gem 'haml', '~> 2.2.9'
+require 'vendor/gems/environment'
+if defined?(Gem) and not Gem.respond_to?(:dir)
+  def Gem.dir
+    @dir ||= File.expand_path(File.dirname(__FILE__)) + '/vendor/gems'
+  end
+end
 
 log = File.new('log/sinatra.log', 'a')
 STDOUT.reopen(log)

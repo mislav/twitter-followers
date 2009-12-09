@@ -1,13 +1,4 @@
-# remove extlib's "Mash"
-Object.send(:remove_const, :Mash) if defined? ::Mash
-# twitter loads the "mash" gem
 require 'twitter'
-
-# fix for Mash v0.0.3
-Mash.class_eval do
-  def stringify_keys() self end
-end
-
 require 'rack/request'
 
 class Twitter::OAuthLogin

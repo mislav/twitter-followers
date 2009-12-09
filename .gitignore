@@ -1,2 +1,5 @@
 config.yml
 log
+bin/*
+vendor/gems/*
+!vendor/gems/cache/
