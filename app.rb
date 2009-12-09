@@ -2,6 +2,7 @@ require 'yaml'
 require 'sinatra'
 require 'haml'
 require 'sass'
+require 'builder'
 
 require 'models'
 
@@ -31,6 +32,16 @@ configure :test do
   DataMapper.setup(:default, 'sqlite3::memory:')
   DataMapper.auto_migrate!
 end
+
+require 'date'
+DateTime.class_eval do
+  def xmlschema
+    strftime("%Y-%m-%dT%H:%M:%S%Z")
+  end unless instance_methods.map {|m| m.to_sym }.include? :xmlschema
+end
+
+require 'action_view/helpers/atom_feed_helper'
+helpers ActionView::Helpers::AtomFeedHelper
 
 helpers do
   def url_for(path)
@@ -69,12 +80,14 @@ helpers do
   def current_user
     @current_user ||= User.get(session[:user_id])
   end
+  
+  def load_followers(user = current_user)
+    @followers = user.followers(:newest, :unprocessed)
+  end
 end
 
 get '/' do
-  if logged_in?
-    @followers = current_user.followers(:newest, :unprocessed)
-  end
+  load_followers if logged_in?
   haml :index
 end
 
@@ -104,4 +117,10 @@ end
 get '/screen.css' do
   content_type 'text/css; charset=utf-8'
   sass :screen
+end
+
+get '/feed.xml' do
+  content_type 'application/atom+xml; charset=utf-8'
+  load_followers(User.first(:screen_name => 'mislav'))
+  builder :feed
 end
