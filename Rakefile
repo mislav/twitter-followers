@@ -6,4 +6,8 @@ namespace :db do
   task :migrate => [:environment] do
     DataMapper.auto_upgrade!
   end
+  
+  task :pull do
+    system %(ssh mislav 'pg_dump -Fc -Ox twitter' | pg_restore -d egotrip -c)
+  end
 end
