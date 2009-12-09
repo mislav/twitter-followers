@@ -17,10 +17,8 @@ module Egotrip
   end
 end
 
-
+enable :sessions
 require 'oauth_login'
-# enable :sessions
-use Rack::Session::Cookie
 use Twitter::OAuthLogin, :key => Egotrip.config[:oauth][:key], :secret => Egotrip.config[:oauth][:secret]
 helpers Twitter::OAuthLogin::Helpers
 
@@ -80,12 +78,13 @@ end
 
 get '/login' do
   user = User.from_twitter(twitter_user)
-  session.update :user_id => user.id
+  session[:user_id] = user.id
   redirect url_for('/')
 end
 
 get '/logout' do
-  session.clear
+  twitter_logout
+  session.delete(:user_id)
   redirect url_for('/')
 end
 

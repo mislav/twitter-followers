@@ -1,13 +1,13 @@
 require 'twitter'
 require 'rack/request'
+require 'hashie/mash'
 
 class Twitter::OAuthLogin
   attr_reader :options
   
   DEFAULTS = {
     :login_path => '/login', :return_to => '/',
-    :site => 'http://twitter.com',
-    :authorize_path => '/oauth/authenticate'
+    :site => 'http://twitter.com', :authorize_path => '/oauth/authenticate'
   }
   
   def initialize(app, options)
@@ -19,11 +19,13 @@ class Twitter::OAuthLogin
     request = Request.new(env)
     
     if request.get? and request.path == options[:login_path]
+      # detect if Twitter redirected back here
       if request[:oauth_verifier]
         handle_twitter_authorization(request) do
           @app.call(env)
         end
       else
+        # user clicked to login; send them to Twitter
         redirect_to_twitter(request)
       end
     else
@@ -42,17 +44,23 @@ class Twitter::OAuthLogin
     end
     
     def twitter_user
-      request.env['twitter.authenticated_user']
+      if session[:twitter_user]
+        Hashie::Mash[session[:twitter_user]]
+      end
+    end
+    
+    def twitter_logout
+      [:oauth_consumer, :access_token, :twitter_user].each { |key| session.delete key }
     end
   end
   
   class Request < Rack::Request
-    # holds :request_token, :access_token
+    # for storing :request_token, :access_token
     def session
       env['rack.session'] ||= {}
     end
     
-    # SUCKS: must duplicate logic from `url` method
+    # SUCKS: must duplicate logic from the `url` method
     def url_for(path)
       url = scheme + '://' + host
 
@@ -68,28 +76,37 @@ class Twitter::OAuthLogin
   protected
   
   def redirect_to_twitter(request)
+    # create a request token and store its parameter in session
     token = oauth_consumer.get_request_token(:oauth_callback => request.url)
     request.session[:request_token] = [token.token, token.secret]
+    # redirect to Twitter authorization page
     redirect token.authorize_url
   end
   
   def handle_twitter_authorization(request)
+    # replace the request token in session with access token
     request_token = ::OAuth::RequestToken.new(oauth_consumer, *request.session[:request_token])
     access_token = request_token.get_access_token(:oauth_verifier => request[:oauth_verifier])
     
+    # store access token and OAuth consumer parameters in session
     request.session.delete(:request_token)
     request.session[:access_token] = [access_token.token, access_token.secret]
     consumer = access_token.consumer
     request.session[:oauth_consumer] = [consumer.key, consumer.secret, consumer.options]
     
+    # get and store authenticated user's info from Twitter
     twitter = Twitter::Base.new access_token
-    request.env['twitter.authenticated_user'] = twitter.verify_credentials
+    request.session[:twitter_user] = twitter.verify_credentials.to_hash
     
+    # pass the request down to the main app
     response = yield
     
+    # check if the app implemented anything at :login_path
     if response[0].to_i == 404
+      # if not, redirect to :return_to path
       redirect request.url_for(options[:return_to])
     else
+      # use the response from the app without modification
       response
     end
   end
