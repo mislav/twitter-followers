@@ -23,8 +23,11 @@ require 'oauth_login'
 use Twitter::OAuthLogin, :key => Egotrip.config[:oauth][:key], :secret => Egotrip.config[:oauth][:secret]
 helpers Twitter::OAuthLogin::Helpers
 
-configure :development, :production do
+configure do
   DataMapper::Logger.new(STDOUT, :debug) if 'irb' == $0
+end
+
+configure :development, :production do
   DataMapper.setup(:default, Egotrip.config[:database])
 end
 
