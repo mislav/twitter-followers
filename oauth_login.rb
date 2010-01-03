@@ -53,7 +53,10 @@ class Twitter::OAuthLogin
     end
     
     def twitter_logout
-      [:oauth_consumer, :access_token, :twitter_user].each { |key| session.delete key }
+      [:oauth_consumer, :access_token, :twitter_user].each do |key|
+        session[key] = nil # work around a Rails 2.3.5 bug
+        session.delete key
+      end
     end
   end
   
