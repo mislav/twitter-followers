@@ -24,6 +24,9 @@ class Twitter::OAuthLogin
         handle_twitter_authorization(request) do
           @app.call(env)
         end
+      elsif request[:denied]
+        # user refused to log in with Twitter, so give up
+        redirect_to_return_path(request)
       else
         # user clicked to login; send them to Twitter
         redirect_to_twitter(request)
@@ -104,11 +107,15 @@ class Twitter::OAuthLogin
     # check if the app implemented anything at :login_path
     if response[0].to_i == 404
       # if not, redirect to :return_to path
-      redirect request.url_for(options[:return_to])
+      redirect_to_return_path(request)
     else
       # use the response from the app without modification
       response
     end
+  end
+  
+  def redirect_to_return_path(request)
+    redirect request.url_for(options[:return_to])
   end
   
   def redirect(url)
