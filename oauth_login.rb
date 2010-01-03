@@ -87,15 +87,7 @@ class Twitter::OAuthLogin
   end
   
   def handle_twitter_authorization(request)
-    # replace the request token in session with access token
-    request_token = ::OAuth::RequestToken.new(oauth_consumer, *request.session[:request_token])
-    access_token = request_token.get_access_token(:oauth_verifier => request[:oauth_verifier])
-    
-    # store access token and OAuth consumer parameters in session
-    request.session.delete(:request_token)
-    request.session[:access_token] = [access_token.token, access_token.secret]
-    consumer = access_token.consumer
-    request.session[:oauth_consumer] = [consumer.key, consumer.secret, consumer.options]
+    access_token = get_access_token(request)
     
     # get and store authenticated user's info from Twitter
     twitter = Twitter::Base.new access_token
@@ -112,6 +104,22 @@ class Twitter::OAuthLogin
       # use the response from the app without modification
       response
     end
+  end
+  
+  private
+  
+  def get_access_token(request)
+    # replace the request token in session with access token
+    request_token = ::OAuth::RequestToken.new(oauth_consumer, *request.session[:request_token])
+    access_token = request_token.get_access_token(:oauth_verifier => request[:oauth_verifier])
+    
+    # store access token and OAuth consumer parameters in session
+    request.session.delete(:request_token)
+    request.session[:access_token] = [access_token.token, access_token.secret]
+    consumer = access_token.consumer
+    request.session[:oauth_consumer] = [consumer.key, consumer.secret, consumer.options]
+    
+    return access_token
   end
   
   def redirect_to_return_path(request)
