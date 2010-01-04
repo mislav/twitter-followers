@@ -20,7 +20,7 @@ end
 
 enable :sessions
 require 'twitter/login'
-use Twitter::Login, :key => Egotrip.config[:oauth][:key], :secret => Egotrip.config[:oauth][:secret]
+use Twitter::Login, :consumer_key => Egotrip.config[:oauth][:key], :secret => Egotrip.config[:oauth][:secret]
 helpers Twitter::Login::Helpers
 
 configure do
@@ -113,7 +113,7 @@ end
 
 post '/approve' do
   requires_login!
-  current_user.approve(params[:user_ids], params[:block_ids], twitter_consumer)
+  current_user.approve(params[:user_ids], params[:block_ids], twitter_client)
   redirect url_for('/')
 end
 
