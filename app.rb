@@ -19,9 +19,9 @@ module Egotrip
 end
 
 enable :sessions
-require 'oauth_login'
-use Twitter::OAuthLogin, :key => Egotrip.config[:oauth][:key], :secret => Egotrip.config[:oauth][:secret]
-helpers Twitter::OAuthLogin::Helpers
+require 'twitter/login'
+use Twitter::Login, :key => Egotrip.config[:oauth][:key], :secret => Egotrip.config[:oauth][:secret]
+helpers Twitter::Login::Helpers
 
 configure do
   DataMapper::Logger.new(STDOUT, :debug) if 'irb' == $0
