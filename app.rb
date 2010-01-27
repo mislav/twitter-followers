@@ -124,6 +124,7 @@ end
 
 get '/feed.xml' do
   content_type 'application/atom+xml; charset=utf-8'
-  load_followers(User.first(:screen_name => 'mislav'))
+  user = User.first(:screen_name => 'mislav')
+  @followings = user.followings.newest.unprocessed
   builder :feed
 end

@@ -1,11 +1,14 @@
 atom_feed(:id => "tag:#{request.host},2009:feed", :root_url => url_for('/')) do |feed|
   feed.title "New Twitter followers"
-  feed.updated @followers.first.created_at
+  if @followings.any?
+    feed.updated @followings.first.created_at
+  end
   
-  for user in @followers
+  for follow in @followings
+    user = follow.user
     item_url = twitter_url(user)
     
-    feed.entry(user, :url => item_url, :id => item_url) do |entry|
+    feed.entry(follow, :url => item_url, :id => item_url) do |entry|
       entry.title '%s (%s)' % [user.full_name, user.screen_name]
       
       entry.content :type => 'xhtml' do |content|
