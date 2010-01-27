@@ -32,6 +32,7 @@ describe "application" do
     follow = follower.follows.first
     follow.blocked.should be_nil
     follow.target.should == mislav
+    follow.created_at.to_time.utc.to_s.should == 'Wed Jan 27 09:02:08 UTC 2010'
   end
   
   it "should approve or block" do

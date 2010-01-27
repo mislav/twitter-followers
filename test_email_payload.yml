@@ -66,6 +66,9 @@ headers[content-type]: multipart/alternative; boundary=000e0cd5c7420980550476753
 headers[dkim-signature]: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma; h=domainkey-signature:mime-version:received:in-reply-to:references :date:message-id:subject:from:to:content-type; bh=Ph1D8cHCRR/bud2TdVEPp9DoCBBpKxgrQ6DIr92FB0A=; b=f3CKP8/KnkgpZYwvXpkkXOtEG9RCOkkSfB/GCeO7uEBiJOFOpFmK/B8eJy2njkY+25 MqwXUmpxDHO1vcA9I+g68JhEhph/NARAi8EybHLN/Gh9DB+Kd02emW+2AmGTBXviyn/7 YEzgyqrx0wO7NKj0EHEdEZILzZanRMRGEwuM8=
 headers[message-id]: <988ff8260910211022y144a4207n68ccd32f9a75e466@mail.gmail.com>
 headers[return-path]: <mislav.marohnic@gmail.com>
+headers[x-twitterrecipientscreenname]: mislav
+headers[x-twitteremailtype]: is_following
+headers[x-twittercreatedat]: "Wed Jan 27 09:02:08 +0000 2010"
 :emails: 
 - mislav@twitter.mislav.net
 :to: mislav

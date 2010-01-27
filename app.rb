@@ -107,7 +107,7 @@ get '/logout' do
 end
 
 post '/' do
-  user = User.from_html_email(params[:html])
+  user = User.from_html_email(params[:html], params[:headers])
   nil
 end
 

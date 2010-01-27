@@ -38,11 +38,17 @@ class User
     })
   end
   
-  def self.from_html_email(html)
+  def self.from_html_email(html, headers)
+    return unless headers['x-twitteremailtype'] == 'is_following'
+    # FIXME: use x-twitterrecipientid
+    recipient = headers['x-twitterrecipientscreenname']
+    target = User.first(:screen_name => recipient)
+    followed_at = Time.parse headers['x-twittercreatedat']
+    
     doc = Nokogiri::HTML html
     attributes = parse_attributes(doc)
     user = first_or_create({:screen_name => attributes[:screen_name]}, attributes)
-    user.follows.create :target => User.first(:screen_name => 'mislav')
+    user.follows.create :target => target, :created_at => followed_at
     user
   end
   
