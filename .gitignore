@@ -1,6 +1,4 @@
+.bundle
+.sass-cache
 config.yml
 log
-bin/*
-vendor/gems/environment.rb
-vendor/gems/ruby/1.8/*
-!vendor/gems/ruby/1.8/cache

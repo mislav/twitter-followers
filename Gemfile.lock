@@ -1,0 +1,105 @@
+--- 
+dependencies: 
+  twitter-login: 
+    group: 
+    - :default
+    version: ~> 0.2.0
+    require: 
+    - twitter/login
+  do_postgres: 
+    group: 
+    - :default
+    version: ~> 0.10.0
+  haml: 
+    group: 
+    - :default
+    version: ~> 3.0.0.beta1
+  rspec: 
+    group: 
+    - :test
+    version: ~> 1.2.9
+    require: 
+    - spec
+  dm-timestamps: 
+    group: 
+    - :default
+    version: ~> 0.10.1
+  dm-core: 
+    group: 
+    - :default
+    version: ~> 0.10.1
+  sinatra: 
+    group: 
+    - :default
+    version: ~> 1.0.0
+  actionpack: 
+    group: 
+    - :default
+    version: ~> 2.3.4
+  builder: 
+    group: 
+    - :default
+    version: ~> 2.1.2
+  do_sqlite3: 
+    group: 
+    - :default
+    version: ~> 0.10.0
+  shotgun: 
+    group: 
+    - :default
+    version: = 0.6
+  nokogiri: 
+    group: 
+    - :default
+    version: ~> 1.4.0
+specs: 
+- activesupport: 
+    version: 2.3.5
+- rack: 
+    version: 1.0.1
+- actionpack: 
+    version: 2.3.5
+- addressable: 
+    version: 2.1.1
+- builder: 
+    version: 2.1.2
+- crack: 
+    version: 0.1.6
+- data_objects: 
+    version: 0.10.1
+- extlib: 
+    version: 0.9.14
+- dm-core: 
+    version: 0.10.2
+- dm-timestamps: 
+    version: 0.10.2
+- do_postgres: 
+    version: 0.10.1
+- do_sqlite3: 
+    version: 0.10.1.1
+- haml: 
+    version: 3.0.0.beta.1
+- hashie: 
+    version: 0.1.8
+- httparty: 
+    version: 0.5.2
+- nokogiri: 
+    version: 1.4.1
+- ruby-hmac: 
+    version: 0.4.0
+- oauth: 
+    version: 0.3.6
+- rspec: 
+    version: 1.2.9
+- shotgun: 
+    version: "0.6"
+- sinatra: 
+    version: "1.0"
+- twitter: 
+    version: 0.8.6
+- twitter-login: 
+    version: 0.2.1
+hash: f7e4fae9d5080954bda05213696947b902e03104
+sources: 
+- Rubygems: 
+    uri: http://gemcutter.org

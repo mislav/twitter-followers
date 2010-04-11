@@ -2,9 +2,6 @@ ENV['RACK_ENV'] = 'test'
 require 'app'
 require 'rack/mock'
 
-require 'fakeweb'
-FakeWeb.allow_net_connect = false
-
 describe "application" do
   before(:each) do
     @request = Rack::MockRequest.new(Sinatra::Application)
