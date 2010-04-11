@@ -8,9 +8,11 @@ rescue LoadError
   Bundler.setup
 end
 
-# log = File.new('log/sinatra.log', 'a')
-# STDOUT.reopen(log)
-# STDERR.reopen(log)
+if ENV['RACK_ENV'] == 'production'
+  log = File.new('log/sinatra.log', 'a')
+  STDOUT.reopen(log)
+  STDERR.reopen(log)
+end
 
 require 'app'
 run Sinatra::Application
