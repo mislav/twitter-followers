@@ -9,6 +9,8 @@
     Logged in as
     - link_to current_user.screen_name, twitter_url(current_user)
     &mdash;
+    - link_to 'feed', "/users/#{current_user.screen_name}.xml"
+    &mdash;
     - link_to 'logout', '/logout'
     
     %form{ :action => '/approve', :method => 'post' }
