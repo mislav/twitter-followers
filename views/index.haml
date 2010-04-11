@@ -1,10 +1,13 @@
 - if logged_in?
-    
   
-  - if @followers.empty?
-    %p No new followers.
+  - if @new_user
+    %h1 Getting started
   - else
-    %h1 Newest followers
+    - if @followers.empty?
+      %p No new followers.
+    - else
+      %h1 Newest followers
+  
   %p.session
     Logged in as
     - link_to current_user.screen_name, twitter_url(current_user)
@@ -12,7 +15,16 @@
     - link_to 'feed', "/users/#{current_user.screen_name}.xml"
     &mdash;
     - link_to 'logout', '/logout'
-    
+  
+  - if @new_user
+    %p You're new here, aren't you?
+    %p
+      Set up your email client to forward emails from Twitter to
+      - link_to 'mislav@twitter.mislav.net', 'mailto:mislav@twitter.mislav.net'
+      with these rules:
+    %pre~ %{from: Twitter\nsubject: "now following you on twitter"}
+  
+  - unless @followers.empty?
     %form{ :action => '/approve', :method => 'post' }
       %ol
         = list_of @followers do |user|

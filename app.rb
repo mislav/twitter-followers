@@ -90,7 +90,10 @@ helpers do
 end
 
 get '/' do
-  load_followers if logged_in?
+  if logged_in?
+    load_followers
+    @new_user = current_user.followings.count.zero?
+  end
   haml :index
 end
 
