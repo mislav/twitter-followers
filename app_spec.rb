@@ -39,7 +39,7 @@ describe "application" do
     follower2 = User.create(:screen_name => 'follower2')
     follower2.follows.create(:target => mislav)
     
-    mock_oauth_consumer('Twitter Base')
+    mock_twitter_consumer('Twitter Base')
     params = { 'user_ids[]' => [follower1.id, follower2.id] }
     post('/approve', build_session(:user_id => mislav.id).update(:lint => true, :input => Rack::Utils.build_query(params)))
     
@@ -75,11 +75,12 @@ describe "application" do
     [Marshal.dump(obj)].pack('m*')
   end
   
-  def mock_oauth_consumer(*args)
+  def mock_twitter_consumer(*args)
+    mock_oauth = mock
+    mock_oauth.should_receive(:authorize_from_access)
+    Twitter::OAuth.should_receive(:new).and_return(mock_oauth)
     consumer = mock(*args)
-    OAuth::Consumer.should_receive(:new).and_return(consumer)
-    # .with(instance_of(String), instance_of(String),
-    # :site => 'http://twitter.com', :authorize_path => '/oauth/authenticate')
+    Twitter::Base.should_receive(:new).with(mock_oauth).and_return(consumer)
     consumer
   end
 end
