@@ -1,6 +1,40 @@
+@import mixins
+
 body
   font: medium / 1.5 "Helvetica Neue", Helvetica, Verdana, sans-serif
   padding: 2em
+
+#facebox .facebox-content
+  font-size: 90%
+  ol
+    list-style: none
+    margin: 0
+    padding: 0
+    li
+      margin: .4em 0
+      padding: .4em 0
+      border-top: 1px solid #ddd
+    .from
+      margin: .2em 0 0 0
+      font-size: 90%
+      color: gray
+      a:link
+        color: inherit
+
+h1
+  font-size: 2em
+  margin: 0 0 1em 0
+  body > &
+    font: 3em "Fertigo Pro", Georgia, Times, serif
+    color: firebrick
+    text-shadow: rgba(black, .4) 1px 1px 2px
+  + .session
+    margin-top: -2em
+    text-transform: uppercase
+    color: gray
+    font:
+      size: 80%
+      style: italic
 
 a:link
   color: darkblue
@@ -13,7 +47,7 @@ form ol
   padding: 0
   list-style: none
   border-top: 1px solid #dddddd
-  width: 20em
+  width: 25em
   li
     border-bottom: 1px solid #dddddd
     padding: 5px 0
@@ -22,5 +56,12 @@ form ol
       display: block
       float: left
       margin-right: 1em
-    a[href]
-      display: block
+    .info span
+      color: #aaa
+      font-size: 70%
+      em
+        font-style: normal
+        margin: 0 .2em
+        color: #555
+
+@import facebox

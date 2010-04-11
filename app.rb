@@ -62,8 +62,8 @@ helpers do
     'http://twitter.com/' + user.screen_name
   end
   
-  def link_to(text, href)
-    haml_tag :a, text, :href => href
+  def link_to(text, href, attrs = {})
+    haml_tag :a, text, attrs.merge(:href => href)
   end
   
   def image(src, attrs = {})
@@ -122,9 +122,19 @@ get '/screen.css' do
   sass :screen
 end
 
-get '/feed.xml' do
+get '/users/:user' do
+  @user = User.first(:screen_name => params[:user])
+  @tweets = begin
+    twitter_client.user_timeline(:screen_name => @user.screen_name)
+  rescue Twitter::Unauthorized
+    []
+  end
+  haml :user_info, :layout => false
+end
+
+get '/users/:user.xml' do
   content_type 'application/atom+xml; charset=utf-8'
-  user = User.first(:screen_name => 'mislav')
+  user = User.first(:screen_name => params[:user])
   @followings = user.followings.newest.unprocessed
   builder :feed
 end

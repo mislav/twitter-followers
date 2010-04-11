@@ -1,0 +1,10 @@
+%h1&= @user.full_name
+
+%p
+  TweetBlocker grade:
+  %strong= @user.tweetblocker_grade
+
+%ol
+  = list_of @tweets do |tweet|
+    = tweet.text
+    %p.from== From #{tweet.source}

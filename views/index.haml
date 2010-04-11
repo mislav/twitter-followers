@@ -1,21 +1,25 @@
 - if logged_in?
-  %p
-    Logged in as
-    - link_to current_user.screen_name, twitter_url(current_user)
-    &mdash;
-    - link_to 'logout', '/logout'
     
   
   - if @followers.empty?
     %p No new followers.
   - else
     %h1 Newest followers
+  %p.session
+    Logged in as
+    - link_to current_user.screen_name, twitter_url(current_user)
+    &mdash;
+    - link_to 'logout', '/logout'
     
     %form{ :action => '/approve', :method => 'post' }
       %ol
         = list_of @followers do |user|
           = image(user.avatar_url, :width => 48, :height => 48)
-          - link_to user.full_name, twitter_url(user)
+          .info
+            - link_to user.full_name, twitter_url(user)
+            %span== (<em>#{user.following_count}</em>/<em>#{user.followers_count}</em>)
+            &mdash;
+            - link_to 'more', "/users/#{user.screen_name}", :rel => 'facebox'
           %input{ :type => 'hidden', :name => 'user_ids[]', :value => user.id }
           %input{ :type => 'checkbox', :name => 'block_ids[]', :value => user.id, :id => "block_#{user.id}" }
           %label{ :for => "block_#{user.id}" } block?

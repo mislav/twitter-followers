@@ -1,3 +1,6 @@
+require 'uri'
+require 'net/http'
+require 'crack/json'
 require 'dm-core'
 require 'dm-timestamps'
 require 'nokogiri'
@@ -79,6 +82,12 @@ class User
       end
       follow.save
     end
+  end
+  
+  def tweetblocker_grade
+    body = Net::HTTP.get(URI("http://tweetblocker.com/api/username/#{screen_name}.json"))
+    result = Hashie::Mash.new Crack::JSON.parse(body)
+    result.candidate.grade
   end
 end
 
