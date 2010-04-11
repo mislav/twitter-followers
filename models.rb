@@ -78,7 +78,12 @@ class User
     
     self.followings(:user_id => user_ids).each do |follow|
       if follow.blocked = block_ids.include?(follow.user.id)
-        twitter.block follow.user.screen_name
+        name = follow.user.screen_name
+        begin
+          twitter.block name
+        rescue
+          warn "Error while blocking #{name} (#{$!.class}): #{$!}"
+        end
       end
       follow.save
     end
