@@ -122,6 +122,13 @@ get '/screen.css' do
   sass :screen
 end
 
+get '/users/:user.xml' do
+  content_type 'application/atom+xml; charset=utf-8'
+  user = User.first(:screen_name => params[:user])
+  @followings = user.followings.newest.unprocessed
+  builder :feed
+end
+
 get '/users/:user' do
   @user = User.first(:screen_name => params[:user])
   @tweets = begin
@@ -130,11 +137,4 @@ get '/users/:user' do
     []
   end
   haml :user_info, :layout => false
-end
-
-get '/users/:user.xml' do
-  content_type 'application/atom+xml; charset=utf-8'
-  user = User.first(:screen_name => params[:user])
-  @followings = user.followings.newest.unprocessed
-  builder :feed
 end
