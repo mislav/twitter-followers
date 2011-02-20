@@ -4,35 +4,236 @@ headers[references]: <4adf04aaccfab_1f19158520de07f022247b1@mx006.twitter.com.tm
 :subject: "Fwd: candy hide is now following you on Twitter!"
 headers[in-reply-to]: <4adf04aaccfab_1f19158520de07f022247b1@mx006.twitter.com.tmail>
 headers[domainkey-signature]: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma; h=mime-version:in-reply-to:references:date:message-id:subject:from:to :content-type; b=jd/rtUNtIUKCf3ddCyfyGb6t3RyBEDItMxSXxhE3LI+CjkFkL6znKBGpcEJek9Xiel Vl8QfL7g29BHqMXYbX5J6xK0Ay6DSa0E9G/xfzFIKuA5/a5tkZzDRBeQCI4znEqYjw4h qnoeaCkloGAEhAgasfYdZeiXeia9h6je5qp2w=
-:html: "<br><br><div class=\"gmail_quote\">---------- Forwarded message ----------<br>From: <b class=\"gmail_sendername\">Twitter</b> <span dir=\"ltr\">&lt;twitter-follow-mislav.marohnic=<a href=\"http://gmail.com\">gmail.com</a>@<a href=\"http://postmaster.twitter.com\">postmaster.twitter.com</a>&gt;</span><br>\n\
-  Date: Wed, Oct 21, 2009 at 14:55<br>Subject: candy hide is now following you on Twitter!<br>To: <a href=\"mailto:mislav.marohnic@gmail.com\">mislav.marohnic@gmail.com</a><br><br><br>\n\
-  <div>\n  \n  <div style=\"padding:8px;background-color:#9AE4E8;background-repeat:no-repeat\">\n    <div style=\"padding:8px;margin:8px 0px\">\n      <a href=\"http://twitter.com\" target=\"_blank\"><img src=\"http://s.twimg.com/a/1256083330/images/twitter_logo_header.png?src=mail\" style=\"border:0px\"></a>\n    </div>\n    <div style=\"min-height:10px;padding:0;margin:0\">\n      <img src=\"http://s.twimg.com/a/1256083330/images/arr2.gif\" style=\"padding:0px;margin:2px 0px 0px 25px\">\n    </div>\n    <div>\n      <table width=\"100%\" style=\"background-color:#fff;color:#222\">\n        <tbody><tr><td width=\"100%\" style=\"padding:8px;margin:8px\">\n          <h2 style=\"margin-bottom:16px\">Hi, Mislav Marohni\xC4\x87.</h2>\n\
-  <p>\n\
-  <a href=\"http://twitter.com/miamicandy5?utm_medium=email&amp;utm_source=follow&amp;utm_campaign=twitter20080331162631\" target=\"_blank\">candy hide (miamicandy5)</a> is now following your tweets on Twitter. \n\
-  </p>\n\
-  <p>\n\
-  A little information about candy hide: </p>\n\
-  <div style=\"margin:8px 0 16px 0px;font:13px &#39;Lucida Grande&#39;, Lucida Grande, Helvetica, Arial, sans-serif;line-height:18px;background:#f6f6f6;border:1px solid #eee;padding:5px\">\n\
-  <table>\n  <tbody><tr>\n    <td valign=\"top\"><a href=\"http://twitter.com/miamicandy5?utm_medium=email&amp;utm_source=follow&amp;utm_campaign=twitter20080331162631\" style=\"text-decoration:none\" target=\"_blank\"><img src=\"http://a3.twimg.com/profile_images/482835659/1haybn_normal.jpg\" width=\"48px\" height=\"48px\" style=\"border:1px solid #ccc;margin-right:5px\"></a></td>\n\n    <td valign=\"top\">\n      <span style=\"color:#777;font-size:110%;font-style:italic;font-family:Georgia, serif\">\n        <span style=\"padding-left:6px\">4 followers</span><br>\n        <span style=\"padding-left:6px\">1 tweet</span><br>\n        <span style=\"padding-left:6px\">following 187 people</span>\n      </span>\n    </td>\n  </tr>\n\
-  </tbody></table>\n\
-  </div>\n\n\
-  <p>\n\
-  You may follow candy hide as well by clicking on the &quot;follow&quot; button on <a href=\"http://twitter.com/miamicandy5?utm_medium=email&amp;utm_source=follow&amp;utm_campaign=twitter20080331162631\" target=\"_blank\">their profile</a>.You may also <a href=\"http://twitter.com/blocks/confirm/miamicandy5?utm_medium=email&amp;utm_source=follow&amp;utm_campaign=twitter20080331162631\" target=\"_blank\">block candy hide</a> if you don&#39;t want them to follow you.</p>\n\n\
-  <p>candy hide may not appear in your follower list. candy hide may have\n\
-  decided to stop following you, or the account may have been suspended\n\
-  for a Terms of Service violation.\n\
-  </p>\n\
-  <p style=\"border-top:1px solid rgb(238, 238, 238);font-family:&#39;Lucida Grande&#39;,Lucida Grande,Helvetica,Arial,sans-serif;font-style:normal;font-variant:normal;font-weight:normal;font-size:13px;font-size-adjust:none;font-stretch:normal;line-height:18px;margin-bottom:0pt;padding-top:13px\">\n\n\
-  <span style=\"font-family:Georgia,serif;font-variant:normal;font-weight:normal;font-size:13px;line-height:normal;font-size-adjust:none;font-stretch:normal;font-style:italic;color:rgb(102, 102, 102)\">The Twitter Team</span>  \n\
-  </p><p style=\"margin-top:5px;font-size:10px\">\n\
-  Turn off these emails at: <a href=\"http://twitter.com/account/notifications?utm_medium=email&amp;utm_source=follow&amp;utm_campaign=twitter20080331162631\" target=\"_blank\">http://twitter.com/account/notifications</a>\n\
-  </p>\n\n\
-  <p></p>\n\n\
-  <p style=\"margin-top:5px;font-size:10px\">\n\
-  Please do not reply to this message; it was sent from an unmonitored email address.  This message is a service email related to your use of Twitter.  For general inquiries or to request support with your Twitter account, please visit us at <a href=\"http://twitter.com/help/\" target=\"_blank\">Twitter Support</a>.\n\
-  </p>\n\n        </td></tr>\n      </tbody></table>\n    </div>\n  </div>\n\
-  </div>\n\n\
-  </div><br>\n\n"
+:html: |
+  <div style="padding: 8px; background-color:#C0DEED; -moz-border-radius:7px;-webkit-border-radius:7px;border-radius:7px">
+     <table border="0" cellspacing="0" cellpadding="0" width="100%">
+        <tr>
+           <td style="padding: 16px 8px 0">
+              <a href="http://twitter.com">
+                 <img src="http://s.twimg.com/a/1286481965/images/twitter_logo_header.png?src=mail" style="display:block; border: 0;" width="155" height="36"/>
+              </a>
+           </td>
+        </tr>
+        <tr>
+           <td valign="bottom" height="20">
+              <div style="width:0; height:0; margin-left:22px; border:10px solid; border-top:0px none; border-color:#C0DEED #C0DEED white #C0DEED;"/>
+           </td>
+        </tr>
+        <tr>
+           <td style="font-family: 'Helvetica Neue', Arial, Helvetica, sans-serif;;font-size:13px; padding: 14px; background-color:#fff; color: #222; -moz-border-radius:5px;-webkit-border-radius:5px; border-radius:5px">
+              <h2 style="font-family: 'Helvetica Neue', Arial, Helvetica, sans-serif;margin:0 0 16px; font-size:18px; font-weight:normal">
+                 Jon Druse (@
+                 <a href="http://twitter.com/sntjon?utm_campaign=newfollow20100823&amp;utm_content=profile&amp;utm_medium=email&amp;utm_source=follow">sntjon</a>
+                 ) is now following your tweets (@
+                 <a href="http://twitter.com/mislav?utm_campaign=newfollow20100823&amp;utm_content=profile&amp;utm_medium=email&amp;utm_source=follow">mislav</a>
+                 ) on Twitter.
+              </h2>
+              <div style="font-family: 'Helvetica Neue', Arial, Helvetica, sans-serif;float:left; margin: 0 8px 8px 0px;background: #eceff8; border: 1px solid #eceff8; padding: 5px;-moz-border-radius:9px; -webkit-border-radius:9px; border-radius:9px;" class="user">
+                 <table style="font-size:10px; border-spacing:0">
+                    <tr>
+                       <td valign="top">
+                          <a href="http://twitter.com/sntjon?utm_campaign=newfollow20100823&amp;utm_content=profile&amp;utm_medium=email&amp;utm_source=follow" style="text-decoration:none;">
+                             <img alt="Jon_jondruse" height="48" src="http://a3.twimg.com/profile_images/358095107/jon_jondruse.com_62f098fa_normal.jpg" style="border: 1px solid #ccc;margin-right: 5px" width="48"/>
+                          </a>
+                       </td>
+                       <td valign="top">
+                          <div style="font-size:13px;font-weight:bold">Jon Druse</div>
+                          <div style="line-height:22px">
+                             @
+                             <a href="http://twitter.com/sntjon?utm_campaign=newfollow20100823&amp;utm_content=profile&amp;utm_medium=email&amp;utm_source=follow">sntjon</a>
+                          </div>
+                       </td>
+                    </tr>
+                 </table>
+                 <div style="margin:10px 0 0 3px; font-size:10px; max-width:333px; ">
+                    <strong>Bio</strong>
+                    Husband, Musician, Ruby on Rails programmer
+                 </div>
+                 <table style="margin:10px 0 3px 3px; font-size:10px; border-spacing:0; ">
+                    <tr>
+                       <td style="padding: 0 15px; border-left:1px solid #CCC; font-size:13px; font-weight:bold; color:#333;border:0; padding-left:0;">644</td>
+                       <td style="padding: 0 15px; border-left:1px solid #CCC; font-size:13px; font-weight:bold; color:#333;">94</td>
+                       <td style="padding: 0 15px; border-left:1px solid #CCC; font-size:13px; font-weight:bold; color:#333;">70</td>
+                    </tr>
+                    <tr>
+                       <th style="padding: 0 15px; border-left:1px solid #CCC; text-align:left; color:#888;border:0; padding-left:0;">tweets</th>
+                       <th style="padding: 0 15px; border-left:1px solid #CCC; text-align:left; color:#888;">following</th>
+                       <th style="padding: 0 15px; border-left:1px solid #CCC; text-align:left; color:#888;">followers</th>
+                    </tr>
+                 </table>
+              </div>
+              <br style="clear:both"/>
+              <div class="socialcontext" style="font-family: 'Helvetica Neue', Arial, Helvetica, sans-serif;font-size: 13px; line-height:18px;">
+                 <div style="padding-bottom:10px">
+                    <p style="margin:0;">@sntjon follows 3 users who follow you:</p>
+                    <ul style="margin:4px 0 0 0; padding:0; list-style: none">
+                       <li style="padding:0 10px; float:left">
+                          <table style="font-size:10px; border-spacing:0">
+                             <tr>
+                                <td valign="top">
+                                   <a href="http://twitter.com/rbates?utm_campaign=newfollow20100823&amp;utm_content=profile&amp;utm_medium=email&amp;utm_source=follow" style="text-decoration:none">
+                                      <img src="http://a0.twimg.com/profile_images/52189024/ryan_bates_cropped_normal.jpg" style="border: 0px none; margin-right: 3px; height:32px; width:32px" height="32" width="32"/>
+                                   </a>
+                                </td>
+                                <td valign="top">
+                                   <div style="font-size:12px;font-weight:bold">Ryan Bates</div>
+                                   <div style="line-height:15px">
+                                      @
+                                      <a href="http://twitter.com/rbates?utm_campaign=newfollow20100823&amp;utm_content=profile&amp;utm_medium=email&amp;utm_source=follow">rbates</a>
+                                   </div>
+                                </td>
+                             </tr>
+                          </table>
+                       </li>
+                       <li style="padding:0 10px; float:left">
+                          <table style="font-size:10px; border-spacing:0">
+                             <tr>
+                                <td valign="top">
+                                   <a href="http://twitter.com/webandy?utm_campaign=newfollow20100823&amp;utm_content=profile&amp;utm_medium=email&amp;utm_source=follow" style="text-decoration:none">
+                                      <img src="http://a0.twimg.com/profile_images/1100688452/headshot_normal.jpg" style="border: 0px none; margin-right: 3px; height:32px; width:32px" height="32" width="32"/>
+                                   </a>
+                                </td>
+                                <td valign="top">
+                                   <div style="font-size:12px;font-weight:bold">Andy Atkinson</div>
+                                   <div style="line-height:15px">
+                                      @
+                                      <a href="http://twitter.com/webandy?utm_campaign=newfollow20100823&amp;utm_content=profile&amp;utm_medium=email&amp;utm_source=follow">webandy</a>
+                                   </div>
+                                </td>
+                             </tr>
+                          </table>
+                       </li>
+                       <li style="padding:0 10px; float:left">
+                          <table style="font-size:10px; border-spacing:0">
+                             <tr>
+                                <td valign="top">
+                                   <a href="http://twitter.com/josevalim?utm_campaign=newfollow20100823&amp;utm_content=profile&amp;utm_medium=email&amp;utm_source=follow" style="text-decoration:none">
+                                      <img src="http://a0.twimg.com/profile_images/124157500/28aa4bd_normal.jpg" style="border: 0px none; margin-right: 3px; height:32px; width:32px" height="32" width="32"/>
+                                   </a>
+                                </td>
+                                <td valign="top">
+                                   <div style="font-size:12px;font-weight:bold">José Valim</div>
+                                   <div style="line-height:15px">
+                                      @
+                                      <a href="http://twitter.com/josevalim?utm_campaign=newfollow20100823&amp;utm_content=profile&amp;utm_medium=email&amp;utm_source=follow">josevalim</a>
+                                   </div>
+                                </td>
+                             </tr>
+                          </table>
+                       </li>
+                    </ul>
+                    <br style="clear:both"/>
+                 </div>
+                 <div style="padding-bottom:10px">
+                    <p style="margin:0;">You and @sntjon both follow 3 users:</p>
+                    <ul style="margin:4px 0 0 0; padding:0; list-style: none">
+                       <li style="padding:0 10px; float:left">
+                          <table style="font-size:10px; border-spacing:0">
+                             <tr>
+                                <td valign="top">
+                                   <a href="http://twitter.com/dhh?utm_campaign=newfollow20100823&amp;utm_content=profile&amp;utm_medium=email&amp;utm_source=follow" style="text-decoration:none">
+                                      <img src="http://a0.twimg.com/profile_images/67881828/headshot64_normal.jpg" style="border: 0px none; margin-right: 3px; height:32px; width:32px" height="32" width="32"/>
+                                   </a>
+                                </td>
+                                <td valign="top">
+                                   <div style="font-size:12px;font-weight:bold">DHH</div>
+                                   <div style="line-height:15px">
+                                      @
+                                      <a href="http://twitter.com/dhh?utm_campaign=newfollow20100823&amp;utm_content=profile&amp;utm_medium=email&amp;utm_source=follow">dhh</a>
+                                   </div>
+                                </td>
+                             </tr>
+                          </table>
+                       </li>
+                       <li style="padding:0 10px; float:left">
+                          <table style="font-size:10px; border-spacing:0">
+                             <tr>
+                                <td valign="top">
+                                   <a href="http://twitter.com/heroku?utm_campaign=newfollow20100823&amp;utm_content=profile&amp;utm_medium=email&amp;utm_source=follow" style="text-decoration:none">
+                                      <img src="http://a0.twimg.com/profile_images/473641368/logo-twitter_normal.png" style="border: 0px none; margin-right: 3px; height:32px; width:32px" height="32" width="32"/>
+                                   </a>
+                                </td>
+                                <td valign="top">
+                                   <div style="font-size:12px;font-weight:bold">heroku</div>
+                                   <div style="line-height:15px">
+                                      @
+                                      <a href="http://twitter.com/heroku?utm_campaign=newfollow20100823&amp;utm_content=profile&amp;utm_medium=email&amp;utm_source=follow">heroku</a>
+                                   </div>
+                                </td>
+                             </tr>
+                          </table>
+                       </li>
+                       <li style="padding:0 10px; float:left">
+                          <table style="font-size:10px; border-spacing:0">
+                             <tr>
+                                <td valign="top">
+                                   <a href="http://twitter.com/wycats?utm_campaign=newfollow20100823&amp;utm_content=profile&amp;utm_medium=email&amp;utm_source=follow" style="text-decoration:none">
+                                      <img src="http://a2.twimg.com/profile_images/427781590/yehuda_normal.jpg" style="border: 0px none; margin-right: 3px; height:32px; width:32px" height="32" width="32"/>
+                                   </a>
+                                </td>
+                                <td valign="top">
+                                   <div style="font-size:12px;font-weight:bold">wycats</div>
+                                   <div style="line-height:15px">
+                                      @
+                                      <a href="http://twitter.com/wycats?utm_campaign=newfollow20100823&amp;utm_content=profile&amp;utm_medium=email&amp;utm_source=follow">wycats</a>
+                                   </div>
+                                </td>
+                             </tr>
+                          </table>
+                       </li>
+                    </ul>
+                    <br style="clear:both"/>
+                 </div>
+              </div>
+              <p style="margin-top:0">&#13; You do not follow Jon Druse.&#13;</p>
+              <p style="margin-top:0">What's Next?</p>
+              <ul style="padding-left:10px; list-style: none;">
+                 <li>
+                    <span style="float: left; width: 15px;">•</span>
+                    Find out more about Jon Druse on @
+                    <a href="http://twitter.com/sntjon?utm_campaign=newfollow20100823&amp;utm_content=profile&amp;utm_medium=email&amp;utm_source=follow">sntjon's profile page</a>
+                    .
+                 </li>
+                 <li>
+                    <span style="float: left; width: 15px;">•</span>
+                    Send Jon Druse
+                    <a href="http://twitter.com/?status=@sntjon&amp;utm_campaign=newfollow20100823&amp;utm_content=action&amp;utm_medium=email&amp;utm_source=follow">an @ reply</a>
+                    .
+                 </li>
+                 <li>
+                    <span style="float: left; width: 15px;">•</span>
+                    Send Jon Druse
+                    <a href="http://twitter.com/direct_messages/create/sntjon?utm_campaign=newfollow20100823&amp;utm_content=action&amp;utm_medium=email&amp;utm_source=follow">a direct message</a>
+                    .
+                 </li>
+                 <li style="padding-top:10px;">
+                    <span style="vertical-align:text-top; margin-right:3px;">
+                       <img src="http://s.twimg.com/a/1286481965/images/phone2.gif" width="8" height="10"/>
+                    </span>
+                    On your mobile? Learn
+                    <a href="http://help.twitter.com/entries/14014-twitter-phone-faqs">Twitter for Mobile</a>
+                    .
+                 </li>
+              </ul>
+              <p style="font-family: 'Helvetica Neue', Arial, Helvetica, sans-serif;margin-top:5px;font-size:11px;color:#666666;">
+                 If you believe Jon Druse is engaging in abusive behavior on Twitter, you may
+                 <a href="http://twitter.com/user_spam_reports/mislav/confirm/sntjon?token=iqubpwVHI2a6GEUa2ao%2FiCgp1nHZBaAPOIfDZIso7FvAWVKGhNmvl6UpghGUlXSnE6pandwaKUvk%2B6zyoZt5C1WKbimoaICFm1UZHW9Qb6H9dUZXcR29Hg%3D%3D&amp;utm_campaign=newfollow20100823&amp;utm_content=block&amp;utm_medium=email&amp;utm_source=follow">report Jon Druse for spam</a>
+                 .
+              </p>
+              <p style="font-family: 'Helvetica Neue', Arial, Helvetica, sans-serif;font-size: 13px; line-height:18px;border-bottom: 1px solid rgb(238, 238, 238); padding-bottom: 10px;">&#13; &#13;</p>
+              <p style="font-family: 'Helvetica Neue', Arial, Helvetica, sans-serif;margin-top:5px;font-size:10px;color:#888888;">
+                 If you'd rather not receive follow notification emails from Twitter, you can
+                 <a href="http://twitter.com/account/unsubscribe?code=rUmpkSIDDYVZhpE%2FEG0SkxqQHNmNPP3R6A3Qtp71%2Bw0%3D&amp;t=follow&amp;utm_campaign=newfollow20100823&amp;utm_content=optout&amp;utm_medium=email&amp;utm_source=follow">unsubscribe</a>
+                 immediately. To resubscribe or change other Twitter email preferences, visit your account settings to manage
+                 <a href="http://twitter.com/settings/notifications?utm_campaign=newfollow20100823&amp;utm_content=notices&amp;utm_medium=email&amp;utm_source=follow">email notices</a>
+                 . Please do not reply to this message; it was sent from an unmonitored email address. This message is a service email related to your use of Twitter. For general inquiries or to request support with your Twitter account, please visit us at
+                 <a href="http://twitter.com/help/">Twitter Support</a>
+                 .
+              </p>
+           </td>
+        </tr>
+     </table>
+  </div>
 headers[mime-version]: "1.0"
 :body: "---------- Forwarded message ----------\n\
   From: Twitter <twitter-follow-mislav.marohnic=gmail.com@\n\
@@ -69,6 +270,8 @@ headers[return-path]: <mislav.marohnic@gmail.com>
 headers[x-twitterrecipientscreenname]: mislav
 headers[x-twitteremailtype]: is_following
 headers[x-twittercreatedat]: "Wed Jan 27 09:02:08 +0000 2010"
+headers[x-twittersenderscreenname]: moorko
+headers[x-twittersendername]: Moorko Mooric
 :emails: 
 - mislav@twitter.mislav.net
 :to: mislav

@@ -59,7 +59,7 @@ helpers do
   end
   
   def twitter_url(user)
-    'http://twitter.com/' + user.screen_name
+    "http://twitter.com/#{user.screen_name}"
   end
   
   def link_to(text, href, attrs = {})

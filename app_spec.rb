@@ -19,12 +19,12 @@ describe "application" do
     response.body.should be_empty
     
     follower = User.last
-    follower.screen_name.should == 'miamicandy5'
-    follower.full_name.should == 'candy hide'
-    follower.followers_count.should == 4
-    follower.following_count.should == 187
-    follower.tweets_count.should == 1
-    follower.avatar_url.should == 'http://a3.twimg.com/profile_images/482835659/1haybn_normal.jpg'
+    follower.screen_name.should == 'moorko'
+    follower.full_name.should == 'Moorko Mooric'
+    follower.followers_count.should == 70
+    follower.following_count.should == 94
+    follower.tweets_count.should == 644
+    follower.avatar_url.should == 'http://a3.twimg.com/profile_images/358095107/jon_jondruse.com_62f098fa_normal.jpg'
     
     follow = follower.follows.first
     follow.blocked.should be_nil
