@@ -1,8 +1,6 @@
 # Twitter followers app
 
-This web app processes incoming "{Person} is now following you on Twitter" emails from Twitter. It saves info about the user who follows you and shows a queue of new followers so you can decide which ones to block. It also gives you an Atom feed of your new followers.
-
-![app screenshot](http://cl.ly/4j6x/Screen_shot_2011-02-20_at_9.22.31_PM.png)
+This web app ([screenshot][]) processes incoming "{Person} is now following you on Twitter" emails from Twitter. It saves info about the user who follows you and shows a queue of new followers so you can decide which ones to block. It also gives you an Atom feed of your new followers.
 
 
 ## Configuration
@@ -31,3 +29,4 @@ Then, in Astrotrain "config.rb":
     Astrotrain::Message.archive_path = File.join(Astrotrain.root, 'archive')
 
 [astrotrain]: https://github.com/entp/astrotrain
+[screenshot]: http://cl.ly/4j6x
