@@ -1,39 +1,26 @@
-require 'yaml'
 require 'sinatra'
 require 'haml'
 require 'sass'
 require 'builder'
+require 'choices'
 
 require 'models'
 
 set :haml, { :format => :html5 }
 
-module Egotrip
-  def self.config_file
-    @config_file ||= ENV['CONFIG'] || File.dirname(__FILE__) + '/config.yml'
-  end
-  
-  def self.config
-    @config ||= File.exists?(config_file) ? YAML::load(File.read(config_file)) : {}
-  end
+Choices.load_settings(File.join(settings.root, 'config.yml'), settings.environment.to_s).each do |key, value|
+  set key.to_sym, value
 end
 
 enable :sessions
 require 'twitter/login'
-use Twitter::Login, :consumer_key => Egotrip.config[:oauth][:key], :secret => Egotrip.config[:oauth][:secret]
+use Twitter::Login, :consumer_key => settings.twitter.consumer_key, :secret => settings.twitter.secret
 helpers Twitter::Login::Helpers
 
 configure do
   DataMapper::Logger.new(STDOUT, :debug) if 'irb' == $0
-end
-
-configure :development, :production do
-  DataMapper.setup(:default, Egotrip.config[:database])
-end
-
-configure :test do
-  DataMapper.setup(:default, 'sqlite3::memory:')
-  DataMapper.auto_migrate!
+  DataMapper.setup(:default, settings.database.url)
+  DataMapper.auto_migrate! if :test == settings.environment
 end
 
 require 'date'
@@ -121,12 +108,11 @@ post '/approve' do
 end
 
 get '/screen.css' do
-  content_type 'text/css; charset=utf-8'
   sass :screen
 end
 
 get '/users/:user.xml' do
-  content_type 'application/atom+xml; charset=utf-8'
+  content_type 'application/atom+xml', :charset => 'utf-8'
   user = User.first(:screen_name => params[:user])
   @followings = user.followings.newest.unprocessed
   builder :feed

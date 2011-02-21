@@ -1,4 +1,4 @@
 .bundle
 .sass-cache
-config.yml
+config.local.yml
 log

@@ -1,0 +1,17 @@
+default: &defaults
+  database:
+    url: <%= ENV['DATABASE_URL'] %>
+  twitter:
+    consumer_key: <%= ENV['TWITTER_KEY'] %>
+    secret: <%= ENV['TWITTER_SECRET'] %>
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+  database:
+    url: "sqlite3::memory:"
+
+production:
+  <<: *defaults
