@@ -1,6 +1,7 @@
 ENV['RACK_ENV'] = 'test'
 require 'app'
 require 'rack/mock'
+require 'spec/autorun'
 
 describe "application" do
   before(:each) do

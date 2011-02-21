@@ -1,3 +1,7 @@
+task :spec do
+  exec(*%w[bundle exec ruby app_spec.rb --color])
+end
+
 task :environment do
   require 'app'
 end
